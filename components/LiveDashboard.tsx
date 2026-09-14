@@ -3,37 +3,22 @@
 import { useEffect, useState } from 'react'
 
 export default function LiveDashboard() {
-  const [leads, setLeads] = useState(0)
-  const [clean, setClean] = useState(0)
-  const [revenue, setRevenue] = useState(0)
-  const [bars, setBars] = useState([0, 0, 0, 0, 0, 0, 0])
+  const [leads, setLeads] = useState(1247)
+  const [clean, setClean] = useState(892)
+  const [revenue, setRevenue] = useState(47)
+  const [mounted, setMounted] = useState(false)
 
-  const targetLeads = 1247
-  const targetClean = 892
-  const targetRevenue = 47
-  const targetBars = [40, 65, 45, 80, 55, 90, 70]
+  const bars = [40, 65, 45, 80, 55, 90, 70]
 
   useEffect(() => {
-    // Count up animation
-    const duration = 1800
-    const start = performance.now()
+    setMounted(true)
 
-    const animate = (now: number) => {
-      const t = Math.min((now - start) / duration, 1)
-      const eased = 1 - Math.pow(1 - t, 3)
-      setLeads(Math.floor(targetLeads * eased))
-      setClean(Math.floor(targetClean * eased))
-      setRevenue(Math.floor(targetRevenue * eased))
-      setBars(targetBars.map((v) => v * eased))
-      if (t < 1) requestAnimationFrame(animate)
-    }
-    requestAnimationFrame(animate)
-
-    // Live ticker after animation
-    const interval = setInterval(() => {
+    // Live ticker for leads
+    const ticker = setInterval(() => {
       setLeads((prev) => prev + Math.floor(Math.random() * 3) + 1)
     }, 2000)
-    return () => clearInterval(interval)
+
+    return () => clearInterval(ticker)
   }, [])
 
   return (
@@ -41,7 +26,7 @@ export default function LiveDashboard() {
       <div className="dashboard-header">
         <div className="dashboard-live">
           <span className="live-pulse" />
-          <span>Live Pipeline</span>
+          <span>Sample Pipeline</span>
         </div>
         <span className="dashboard-growth">+24.7%</span>
       </div>
@@ -65,7 +50,10 @@ export default function LiveDashboard() {
             <div key={i} className="bar-wrap">
               <div
                 className="bar"
-                style={{ height: `${height}%`, animationDelay: `${i * 60}ms` }}
+                style={{
+                  height: mounted ? `${height}%` : '4px',
+                  transitionDelay: `${i * 80}ms`,
+                }}
               />
             </div>
           ))}
