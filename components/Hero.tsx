@@ -1,3 +1,5 @@
+import LiveDashboard from './LiveDashboard'
+
 export default function Hero() {
   return (
     <section className="hero">
@@ -14,15 +16,11 @@ export default function Hero() {
             <a href="#services" className="btn-secondary">Learn More →</a>
           </div>
           <div className="trust-badge">
-            <span>⭐ 5.0</span> • <span>15+ companies served</span> • <span>2x pipeline growth avg.</span>
+            <span>🇺🇸 Remote-first</span> • <span>5-day audit turnaround</span> • <span>No contracts required</span>
           </div>
         </div>
         <div className="hero-image">
-          <div className="placeholder-graphic">
-            <div className="chart"></div>
-            <div className="chart"></div>
-            <div className="chart"></div>
-          </div>
+          <LiveDashboard />
         </div>
       </div>
     </section>
