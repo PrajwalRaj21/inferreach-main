@@ -8,7 +8,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'InferReach – GTM Data Engineering',
+  title: 'InferReach | GTM Data Engineering',
   description: 'We clean your data, automate your outreach, and build the infrastructure your GTM team needs.',
 }
 
